@@ -4,16 +4,16 @@ Feature: Manage Users
   I want to edit user profiles only when authorized
 
   Scenario Outline: Show or hide edit profile link
-    Given the following user records
-      | name   | password |
-      | bob    | secret12 |
-      | admin  | secret12 |
-      | phredd | secret78 |
+  #  Given the following user records
+  #    | name   | password |
+  #   | bob    | secret12 |
+  #    | admin  | secret12 |
+  #    | phredd | secret78 |
 
-  #  Given the following user records and role assignments
-  #   | name   | password | rolename |
-  #   | phredd | secret12 | user     |
-  #   | admin  | secret12 | admin    |
+    Given the following user records and role assignments
+     | name   | password | rolename |
+     | phredd | secret12 | User     |
+     | bob  | secret12 | Admin    |
 
    And I am logged in as "<login>" with password "secret12"
     When I visit profile for "<profile>"

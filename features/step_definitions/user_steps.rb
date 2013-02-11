@@ -3,18 +3,20 @@ Given /^the following user records$/ do |table|
     FactoryGirl.create(:user, name: hash["name"], password: hash["password"])
   end
 
+  #User.find_by_name("bob").role?('Admin').should be_true
+
 end
 Given /^the following user records and role assignments$/ do |table|
   table.hashes.each do |hash|
 
-    role = FactoryGirl.build(:role,{:rolename => :rolename})
-    user = FactoryGirl.build(:user,{:name => :name, :password => :password})
+    role = FactoryGirl.create(:role, rolename: hash["rolename"])
+    user = FactoryGirl.create(:user, name: hash["name"], password: hash["password"])
 
-   FactoryGirl.create(:role_assignment)
+   FactoryGirl.create(:role_assignment, user: user, role: role)
 
 
   end
-
+  User.find_by_name("bob").role?("Admin").should be_true
 end
 Given /^I am logged in as "([^"]*)" with password "([^"]*)"$/ do |name, password|
   visit '/login'
